@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm mới nhân viên</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/3e1f275d46.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container" style="max-width: 500px">
+    <div class="row">
+        <div class="col-8">
+            <h3>Thêm mới nhân viên</h3>
+        </div>
+        <div class="col-4">
+            <button id="button" class="btn btn-danger" style="float: right"><a href="/employees" style="color: white;">Thoát</a>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <th:block th:if="${message}">
+            <p th:text="${message}"></p>
+        </th:block>
+    </div>
+    <div>
+        <form th:action="@{/create-employee}" th:object="${employee}" method="post">
+            <div class="row">
+                <div class="col-6">
+                    <div>Mã nhân viên:</div>
+                    <div><input type="text" th:field="*{employeeId}"/></div>
+                    <div th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}">EmployeeId Error</div>
+                </div>
+                <div class="col-6">
+                    <div style="float: right">
+                        <div>Chọn nhóm nhân viên:</div>
+                        <div>
+                            <select th:field="*{department}">
+                                <option th:each="p : ${departments}" th:value="${p.id}" th:text="${p.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div>Họ tên:</div>
+                    <div><input type="text" th:field="*{name}"/></div>
+                    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+                </div>
+                <div class="col-6">
+                    <div style="float: right">
+                        <div>Ngày sinh:</div>
+                        <div><input type="text" th:field="*{dateOfBirth}" placeholder="yyyy-MM-dd"/></div>
+                        <div th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">DateOfBirth Error
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div>Số điện thoại:</div>
+                    <div><input type="text" th:field="*{numberPhone}"/></div>
+                    <div th:if="${#fields.hasErrors('numberPhone')}" th:errors="*{numberPhone}">NumberPhone Error</div>
+                </div>
+                <div class="col-6">
+                    <div style="float: right">
+                        <div>Số CMND:</div>
+                        <div><input type="text" th:field="*{personId}"/></div>
+                        <div th:if="${#fields.hasErrors('personId')}" th:errors="*{personId}">PersonId Error</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div>Emai:</div>
+                    <div><input type="text" th:field="*{email}"/></div>
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+                </div>
+                <div class="col-6">
+                    <div style="float: right">
+                        <div>Địa chỉ:</div>
+                        <div><input type="text" th:field="*{address}"/></div>
+                        <div th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address Error</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <input type="radio" name="gender" th:field="*{gender}" value="Nam">Nam
+                    <input type="radio" name="gender" th:field="*{gender}" value="Nữ">Nữ
+                    <td th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Gender Error</td>
+                </div>
+                <div class="col-6" style="margin-top: 20px;">
+                    <div style="float: right;">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check">Thêm</i></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

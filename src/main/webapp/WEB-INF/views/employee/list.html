@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách nhân viên</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/3e1f275d46.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <button id="button"><a href="/create-employee"><i class="fas fa-plus">Thêm mới nhân viên</i></a></button>
+        </div>
+        <div class="col-8">
+            <form style="float: right;">
+                <input name="s" type="text" style="width: 400px;" placeholder="Nhập nội dung tìm kiếm"/>
+                <button type="submit"><i class="fas fa-search">Tìm kiếm</i></button>
+            </form>
+        </div>
+    </div>
+    <div class="row" style="margin: 20px 0px">
+        <div class="col">
+            <h1 style="color: black"><i class="fas fa-list">Danh sách nhân viên</i></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Mã nhân viên</th>
+                    <th scope="col">Nhóm nhân viên</th>
+                    <th scope="col">Họ tên</th>
+                    <th scope="col">Giới tính</th>
+                    <th scope="col">Số điện thoại</th>
+                    <th scope="col">Chức năng</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="em : ${employees}">
+                    <th scope="row" th:text="${em.employeeId}"></th>
+                    <td th:text="${em.department.name}"></td>
+                    <td th:text="${em.name}"></td>
+                    <td th:text="${em.gender}"></td>
+                    <td th:text="${em.numberPhone}"></td>
+                    <td>
+                        <a th:href="@{/edit-employee/__${em.id}__ }" style="margin-right: 10px"><i class="fas fa-edit">Edit</i> </a>
+                        <a th:href="@{/delete-employee/__${em.id}__ }"><i class="fas fa-trash-alt" style="color: red">Delete</i></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
